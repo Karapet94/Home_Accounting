@@ -1,0 +1,51 @@
+<p class="text-xs-center">Please login for work</p>
+<div
+        @fade
+        class="alert alert-{{message.type}}"
+        *ngIf="message.text"
+>
+  {{message.text}}
+</div>
+<form [formGroup]="forms" (ngSubmit)="onSubmit()">
+  <div class="form-group"
+  [ngClass]="{'has-error':forms.get('email').invalid && forms.get('email').touched}"
+  >
+    <label for="email">Email</label>
+    <input
+            type="text"
+            class="form-control underlined"
+            id="email"
+            placeholder="Email"
+            formControlName="email"
+    >
+    <span class="form-help-text" *ngIf="forms.get('email').invalid && forms.get('email').touched">
+      <span *ngIf="forms.get('email')['errors']['required']">Please fill this box</span>
+    <span *ngIf="forms.get('email')['errors']['email']">Please write correct email</span>
+    </span>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error':forms.get('password').invalid && forms.get('password').touched}">
+    <label for="password">Password</label>
+    <input
+            type="password"
+            class="form-control underlined"
+            id="password"
+            placeholder="Password"
+            formControlName="password"
+    >
+    <span class="form-help-text" *ngIf="forms.get('password').invalid && forms.get('password').touched">
+      <span *ngIf="forms.get('password')['errors']['required']">Please fill this box</span>
+    <span *ngIf="forms.get('password')['errors']['minlength']">
+      Password must be more thane {{forms.get('password')['errors']['minlength']['requiredLength']}} symbol , but now written
+      {{forms.get('password')['errors']['minlength']['actualLength']}}
+    </span>
+    </span>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-block btn-primary" [disabled]="forms.invalid">Login</button>
+  </div>
+  <div class="form-group">
+    <p class="text-muted text-xs-center">
+      Do you have not account? <a [routerLink]="'/registration'">to Registration!</a>
+    </p>
+  </div>
+</form>

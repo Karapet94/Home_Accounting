@@ -1,0 +1,25 @@
+<div class="title-block">
+    <h3 class="title pull-left">
+        History page
+        <span class="sparkline bar"></span>
+    </h3>
+    <div class="pull-right">
+        <button class="btn-sm btn btn-primary-outline" (click)="openFilter()">
+            <i class="fa fa-filter"></i>
+        </button>
+    </div>
+</div>
+<div class="text-center" *ngIf="!isLoaded">
+    <wfm-loader></wfm-loader>
+</div>
+<div *ngIf="isLoaded">
+    <wtm-history-chart [data]="charData"></wtm-history-chart>
+    <wtm-history-events [categories]="categories" [events]="filteredEvents"></wtm-history-events>
+    <div *ngIf="isFilterVisibility">
+        <wtm-history-filter
+        (onFilterCancel)="onFilterCancel()"
+        (onFilterApply)="onFilterApply($event)"
+        [categories]="categories"
+        ></wtm-history-filter>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="title-block">
+  <h3 class="title">
+    Record page
+    <span class="sparkline bar"></span>
+  </h3>
+</div>
+<section class="section text-center" *ngIf="!isLoaded">
+  <wfm-loader></wfm-loader>
+</section>
+<section class="section" *ngIf="isLoaded">
+  <div class="row">
+    <div class="col-md-6">
+      <wtm-add-event [categories]="categories">
+      </wtm-add-event>
+    </div>
+    <div class="col-md-6">
+      <wtm-add-category
+              (onCategoryAdd)="newCategoryAdded($event)"
+      >
+      </wtm-add-category>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <wtm-edit-category
+            (onCategoryEdit)="categoryWasEdited($event)"
+            [categories]="categories">
+      </wtm-edit-category></div>
+  </div>
+</section>
